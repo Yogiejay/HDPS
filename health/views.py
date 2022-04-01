@@ -10,6 +10,7 @@ from .models import *
 from django.contrib.auth import authenticate, login, logout
 import numpy as np
 import pandas as pd
+from sklearn.svm import SVC
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -178,19 +179,38 @@ def preprocess_inputs(df, scaler):
 
 
 def prdict_heart_disease(list_data):
+    #print(list_data)
     csv_file = Admin_Helath_CSV.objects.get(id=1)
     df = pd.read_csv(csv_file.csv_file)
 
     X = df[['age','sex','cp',  'trestbps',  'chol',  'fbs',  'restecg',  'thalach',  'exang',  'oldpeak',  'slope',  'ca',  'thal']]
+    #print(X)
     y = df['target']
-    X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state=0)
-    nn_model = GradientBoostingClassifier(n_estimators=100,learning_rate=1.0,max_depth=1, random_state=0)
+    #print(y)
+    #X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state=0)
+    X_train = X
+    y_train = y
+    #nn_model = GradientBoostingClassifier(n_estimators=100,learning_rate=1.0,max_depth=1, random_state=0)
+    nn_model = SVC(  probability = True)
+    #nn_model = LogisticRegression()
     nn_model.fit(X_train, y_train)
     pred = nn_model.predict([list_data])
-    print("Neural Network Accuracy: {:.2f}%".format(nn_model.score(X_test, y_test) * 100))
-    print("Prdicted Value is : ", format(pred))
+    #accuracy = nn_model.predict_log_proba([list_data])
+    accuracy = nn_model.predict_proba([list_data])
+    print(pred ,  accuracy)
+    #print("Neural Network Accuracy: {:.2f}%".format(nn_model.score(X_test, y_test) * 100))
+    #print("Prdicted Value is : ", format(pred))
     dataframe = str(df.head())
-    return (nn_model.score(X_test, y_test) * 100),(pred)
+    #return (nn_model.score(X_test, y_test) * 100),(pred)
+    if accuracy[0][0] <= 0.5:
+        pred = "1"
+        return (abs((accuracy[0][1])*100)) , (pred)
+    else:
+        pred = "0" 
+        return (abs(accuracy[0][0])*100) , pred
+    #return accuracy[0][0] , pred
+    
+    
 
 @login_required(login_url="login")
 def add_doctor(request,pid=None):
@@ -216,6 +236,7 @@ def add_heartdetail(request):
         # list_data = [57, 0, 1, 130, 236, 0, 0, 174, 0, 0.0, 1, 1, 2]
         list_data = []
         value_dict = eval(str(request.POST)[12:-1])
+        print(value_dict)
         count = 0
         for key,value in value_dict.items():
             if count == 0:
@@ -254,10 +275,12 @@ def view_search_pat(request):
     try:
         doc = Doctor.objects.get(user=request.user)
         data = Search_Data.objects.filter(patient__address__icontains=doc.address).order_by('-id')
+        #print(data)
     except:
         try:
             doc = Patient.objects.get(user=request.user)
             data = Search_Data.objects.filter(patient=doc).order_by('-id')
+            print(data)
         except:
             data = Search_Data.objects.all().order_by('-id')
     return render(request,'view_search_pat.html',{'data':data})
