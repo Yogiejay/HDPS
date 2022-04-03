@@ -240,12 +240,12 @@ def add_heartdetail(request):
         count = 0
         for key,value in value_dict.items():
             if count == 0:
-                count =1
+                count = 1
                 continue
-            if key == "sex" and value[0] == "Male" or value[0] == 'male' or value[0]=='m' or value[0] == 'M':
+            if key == "Gender" and (value[0] == "Male" or value[0] == 'male'):
                 list_data.append(0)
                 continue
-            elif key == "sex":
+            elif key == "Gender" and (value[0] == "female" or value[0] == 'Female'):
                 list_data.append(1)
                 continue
             list_data.append(value[0])
