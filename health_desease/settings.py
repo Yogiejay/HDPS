@@ -26,8 +26,9 @@ SECRET_KEY = '#(b&+nu(!u((bkcqypjva6_7kn^2dx$*h&790s@^b3tugbuq95'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = ["https://heart-disease-prediction-webb.herokuapp.com/",
+'localhost',
+'127.0.0.1']
 
 # Application definition
 
