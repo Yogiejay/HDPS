@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '#(b&+nu(!u((bkcqypjva6_7kn^2dx$*h&790s@^b3tugbuq95'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["https://heart-disease-prediction-webb.herokuapp.com/",
 'localhost',
