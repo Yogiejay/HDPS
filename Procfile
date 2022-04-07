@@ -1,1 +1,1 @@
-web: gunicorn health_disease.wsgi
+web: gunicorn health_desease.wsgi
