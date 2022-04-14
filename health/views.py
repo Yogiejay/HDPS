@@ -498,6 +498,7 @@ def prdict_heart_disease(list_data):
     df = df.dropna()
     X = df[['age','sex','cp',  'trestbps',  'chol',  'fbs',  'restecg',  'thalach',  'exang',  'oldpeak',  'slope',  'ca',  'thal']]
     #print(X)
+    #print()
     y = df['target']
     #print(y)
     print(len(X) , len(y))
