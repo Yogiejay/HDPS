@@ -180,7 +180,7 @@ def preprocess_inputs(df, scaler):
 
 def prdict_heart_disease(list_data):
     #print(list_data)
-    csv_file = Admin_Helath_CSV.objects.filter(id=1).first()
+    csv_file = Admin_Helath_CSV.objects.get(id=1)
     df = pd.read_csv(csv_file.csv_file)
 
     X = df[['age','sex','cp',  'trestbps',  'chol',  'fbs',  'restecg',  'thalach',  'exang',  'oldpeak',  'slope',  'ca',  'thal']]
