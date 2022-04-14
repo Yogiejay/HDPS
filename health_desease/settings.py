@@ -79,8 +79,13 @@ WSGI_APPLICATION = 'health_desease.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'degbo6glstbo14',
+        'USER': 'uqgrfohjxaggze',
+        'PASSWORD': '018d1a38cf2d46e04ed6d651865dfe80f57d3a09cd0a9055d626380d697e9975',
+        'HOST': 'postgres://uqgrfohjxaggze:018d1a38cf2d46e04ed6d651865dfe80f57d3a09cd0a9055d626380d697e9975@ec2-18-215-96-22.compute-1.amazonaws.com:5432/degbo6glstbo14',
+        'PORT': '5432',
     }
 }
 
