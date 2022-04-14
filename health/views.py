@@ -492,7 +492,7 @@ def prdict_heart_disease(list_data):
 [57,0,0,140,241,0,13,123,1,0.2,1,0,3,0],
 [45,1,3,110,2264,0,13,132,0,12.2,1,0,3,0],
 [68,1,0,144,193,1,1,1412,0,3.4,1,2,3,0]]
-    df = pd.read_csv(data , columns = ['age','sex','cp',  'trestbps',  'chol',  'fbs',  'restecg',  'thalach',  'exang',  'oldpeak',  'slope',  'ca',  'thal'])
+    df = pd.DataFrame(data , columns = ['age','sex','cp',  'trestbps',  'chol',  'fbs',  'restecg',  'thalach',  'exang',  'oldpeak',  'slope',  'ca',  'thal'])
 
     X = df[['age','sex','cp',  'trestbps',  'chol',  'fbs',  'restecg',  'thalach',  'exang',  'oldpeak',  'slope',  'ca',  'thal']]
     #print(X)
